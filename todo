@@ -1,0 +1,18 @@
+v1: Add, edit, search and delete a patient.
+Will be using existing MySQL database.
+
+Views:
+1. /add-patient :      Show a form for adding patient. All validations are done either client side or through services (api?).
+                       After adding patient successfully, redirect to show-patient.
+2. /edit-patient/:id : Show stuff about patient - whether it is editable or not. Also, relevant fields should be editable.
+				       Validation will happen, and if valid data, submit will work (PUT request). Also option to delete patient (DELETE REQUEST), which should redirect to search page. Later need to add vaccination schedule to this view also.
+3. /search:            Show various means to search, + show the searched results in a table below. If single result, then maybe redirect to /patient/:id
+
+
+API:
+
+GET /patient/:id
+POST /patient -> should redirect to edit new patient on success, else to the same page with errors
+PUT /patient/:id
+DELETE /patient/:id
+POST /patient/search/

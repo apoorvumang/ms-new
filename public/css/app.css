@@ -1,8 +1,12 @@
 /* app css stylesheet */
 
 body {
-  padding-top:70px;
+  padding-top:0;
+  padding-bottom: 100px;
 }
 
+.search-div legend {
+	padding-top:20px;
+}
 
   

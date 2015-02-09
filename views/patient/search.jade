@@ -1,0 +1,51 @@
+div(ng-controller="SearchPatientCtrl").search-div
+	h4 Search
+	.row
+		.col-sm-12
+			form(role="form").form-horizontal
+				.form-group
+					label(for="patientID").col-sm-2.control-label ID:
+					.col-sm-6
+						input#patientID(ng-model="pid", placeholder="ID", type="number").form-control
+					.col-sm-2
+						button(ng-click="searchByID(pid)", type="submit", ng-disabled="!(pid > 0)").btn.btn-default.btn-block Go
+	.row
+		.col-sm-12
+			form(role="form").form-horizontal
+				.form-group
+					label(for="patientDOB").col-sm-2.control-label DOB:
+					.col-sm-6
+						input#patientDOB.form-control(ng-model="dob", type="date")
+					.col-sm-2
+						button(ng-click="searchByDOB(dob)", type="submit", ng-disabled="!dob > 0").btn.btn-default.btn-block Go
+	.row
+		.col-sm-12
+			form(role="form").form-horizontal
+				.form-group
+					label(for="patientName").col-sm-2.control-label Name
+					.col-sm-6
+						input#patientName.form-control(type="text", ng-model="patientName", placeholder="Name")
+					.col-sm-2
+						button(ng-click="searchByName(patientName)", type="submit", ng-disabled="!patientName").btn.btn-default.btn-block Go
+	div#results(ng-show="patientList.length > 0")
+		.row
+			.col-sm-12
+				h3 Results
+				table.table
+					tr
+						th(ng-repeat= "field in fieldList")
+							span(ng-click="changeOrdering(field)") {{field.displayName}}
+								span(ng-show="orderByField == '{{field.name}}'", style="padding-left:10px")
+									span(ng-show="!reverseSort").glyphicon.glyphicon-arrow-up
+									span(ng-show="reverseSort").glyphicon.glyphicon-arrow-down
+					tr(ng-repeat="patient in patientList|orderBy:orderByField:reverseSort", ng-class="{success: patient.sms == true}", ng-click="patient.sms = !patient.sms")
+						td {{patient.id}}
+						td {{patient.name}}
+						td {{toPrintableDate(patient.dob)}}
+						td {{patient.sex}}
+						td {{patient.phone}}
+		.row
+			.col-sm-6
+				textarea.form-control
+			.col-sm-6
+				button.btn.btn-default(ng-click="toggleAllSMS()") Toggle all
