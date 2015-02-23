@@ -1,4 +1,4 @@
-div(ng-controller="SearchPatientCtrl").search-div
+div.search-div
 	h4 Search
 	.row
 		.col-sm-12
@@ -31,6 +31,8 @@ div(ng-controller="SearchPatientCtrl").search-div
 		.row
 			.col-sm-12
 				h3 Results
+					button.btn.btn-default(ng-click="toggleAllSMS()", style="margin-left: 20px") Toggle all
+					button.btn.btn-default(ng-click="deselectAllSMS()", style="margin-left: 20px") Deselect all
 				table.table
 					tr
 						th(ng-repeat= "field in fieldList")
@@ -40,12 +42,20 @@ div(ng-controller="SearchPatientCtrl").search-div
 									span(ng-show="reverseSort").glyphicon.glyphicon-arrow-down
 					tr(ng-repeat="patient in patientList|orderBy:orderByField:reverseSort", ng-class="{success: patient.sms == true}", ng-click="patient.sms = !patient.sms")
 						td {{patient.id}}
-						td {{patient.name}}
-						td {{toPrintableDate(patient.dob)}}
+						td
+							a(href="edit-patient/{{patient.id}}") {{patient.name}}
+						td {{patient.dob | printableDate}}
 						td {{patient.sex}}
 						td {{patient.phone}}
 		.row
 			.col-sm-6
-				textarea.form-control
+				form(role="form")
+					.form-group
+						label(for="smsMessage").control-label SMS Message
+						textarea#smsMessage(ng-model="smsMessage", placeholder="SMS", rows="4").form-control
+					button(ng-click="sendSMS(smsMessage)", type="submit", ng-disabled="!(patientList.length > 0)").btn.btn-default Send SMS
+					button(ng-click="resetSMSMessage()", style="margin-left:10px").btn.btn-default Reset to default
 			.col-sm-6
-				button.btn.btn-default(ng-click="toggleAllSMS()") Toggle all
+				label {{getSelectedLength()}} patients selected
+				.alert.alert-success(ng-show = "smsSuccess") Successfully sent {{numSMSSuccess}} messages!
+				.alert.alert-danger(ng-show = "smsFailed") Failed to send messages!

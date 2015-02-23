@@ -51,6 +51,7 @@ app.get('/api/patient/:id', api.getPatient);
 app.get('/api/patient/dob/:dob', api.getPatientDOB);
 app.get('/api/patient/name/:name', api.getPatientName);
 app.get('/api/patient/idrange/:startID/:endID', api.getPatientRange);
+app.post('/api/patient/sms', api.postSMS);
 
 
 // redirect all others to the index (HTML5 history)
@@ -80,5 +81,3 @@ mysql.connection.query('SELECT name FROM patients WHERE id=69', function(err, ro
 
   console.log('The name is: ', rows[0].name);
 });
-
-// connection.end();

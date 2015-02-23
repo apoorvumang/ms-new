@@ -67,4 +67,9 @@ exports.getPatientName = function(req, res) {
 			res.json(rows);
 		}
 	});
-}
+};
+
+exports.postSMS = function(req, res) {
+	console.log(req.body);
+	res.json({numSent: req.body.smsList.length});
+};

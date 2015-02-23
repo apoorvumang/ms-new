@@ -41,13 +41,24 @@ function MyCtrl1($scope) {
 }
 MyCtrl1.$inject = ['$scope'];
 
-
 function MyCtrl2() {
 }
 MyCtrl2.$inject = [];
 
 function AddPatientCtrl() {}
 AddPatientCtrl.$inject = [];
+
+function EditPatientCtrl($scope, $http, $routeParams) {
+	$http({method: 'GET', url: '/api/patient/'+$routeParams['patientID']}).
+		success(function(data, status, headers, config) {
+		$scope.patient = data;
+	}).
+	error(function(data, status, headers, config) {
+		$scope.patient = {};
+	});
+}
+
+EditPatientCtrl.$inject = ['$scope', '$http', '$routeParams'];
 
 function SearchPatientCtrl($scope, $http) {
 	$scope.patient = {};
@@ -61,6 +72,11 @@ function SearchPatientCtrl($scope, $http) {
 	];
 	$scope.orderByField = 'id';
 	$scope.reverseSort = false;
+	$scope.defaultSMSMessage = "Dear parent,\nWishing your child %name% a very Happy Birthday!\nDr. Mahima\n981129950";
+	$scope.smsMessage = $scope.defaultSMSMessage;
+	$scope.smsSuccess = false;
+	$scope.numSMSSuccess = 0;
+	$scope.smsFailed = false;
 
 	var processData = function(pList) {
 		for (var i = 0; i < pList.length; i++) {
@@ -105,15 +121,47 @@ function SearchPatientCtrl($scope, $http) {
 		$scope.reverseSort = !$scope.reverseSort;
 	};
 
-	$scope.toPrintableDate = function(date) {
-		var printableDate = new Date(date);
-		return printableDate.toDateString();
-	};
-
 	$scope.toggleAllSMS = function() {
 		for (var i = 0; i < $scope.patientList.length; i++) {
 			$scope.patientList[i].sms = !$scope.patientList[i].sms;
 		}
+	};
+
+	$scope.deselectAllSMS = function() {
+		for (var i = 0; i < $scope.patientList.length; i++) {
+			$scope.patientList[i].sms = false;
+		}
+	};
+
+	$scope.sendSMS = function(smsMessage) {
+		var smsList = [];
+		for (var i = 0; i < $scope.patientList.length; i++) {
+			if($scope.patientList[i].sms === true)
+				smsList.push({id: $scope.patientList[i].id, phone: $scope.patientList[i].phone});
+		}
+		$http.post('/api/patient/sms', {message: smsMessage, smsList: smsList}).
+		success(function(data, status, headers, config) {
+			$scope.smsSuccess = true;
+			$scope.smsFailed = false;
+			$scope.numSMSSuccess = data.numSent;
+		}).
+		error(function(data, status, headers, config) {
+			$scope.smsSuccess = false;
+			$scope.smsFailed = true;
+		});
+	};
+
+	$scope.getSelectedLength = function() {
+		var numSelected = 0;
+		for (var i = 0; i < $scope.patientList.length; i++) {
+			if($scope.patientList[i].sms === true)
+				numSelected++;
+		}
+		return numSelected;
+	};
+
+	$scope.resetSMSMessage = function() {
+		$scope.smsMessage = $scope.defaultSMSMessage;
 	};
 
 	$scope.pretty= function () {
