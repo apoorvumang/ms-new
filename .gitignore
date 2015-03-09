@@ -26,15 +26,8 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
-# Debug log from npm
-npm-debug.log
-
-ms-new.sublime-workspace
+.idea
 
 ms-new.iml
-
-ms-new.sublime-project
-
-.idea
 
 .DS_Store
