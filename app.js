@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies
  */
@@ -29,12 +28,12 @@ app.use(app.router);
 
 // development only
 if (app.get('env') === 'development') {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
 // production only
 if (app.get('env') === 'production') {
-  // TODO
+    // TODO
 }
 
 // Routes
@@ -62,7 +61,7 @@ app.get('*', routes.index);
  */
 
 http.createServer(app).listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
 });
 
 
@@ -75,8 +74,8 @@ http.createServer(app).listen(app.get('port'), function () {
 
 // connection.connect();
 
-mysql.connection.query('SELECT name FROM patients WHERE id=69', function(err, rows, fields) {
-  if (err) throw err;
+mysql.connection.query('SELECT name FROM patients WHERE id=69', function (err, rows, fields) {
+    if (err) throw err;
 
-  console.log('The name is: ', rows[0].name);
+    console.log('The name is: ', rows[0].name);
 });

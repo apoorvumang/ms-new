@@ -18,9 +18,9 @@ angular.module('myApp.filters', []).
     }).
     filter('printableSex', function () {
         return function (sex) {
-            if(sex == "M")
+            if (sex == "M")
                 return "Male";
-            else if(sex == "F")
+            else if (sex == "F")
                 return "Female";
             else
                 return sex;
@@ -38,7 +38,7 @@ angular.module('myApp.filters', []).
             //for(var i = 0; i < arr.length; ++i) {
             //    result = result + arr[i] + "\n";
             //}
-            if(address)
+            if (address)
                 return address.replace(/ *, */g, '\n');
             else
                 return address;
@@ -46,7 +46,9 @@ angular.module('myApp.filters', []).
     }).
     filter('tel', function () {
         return function (tel) {
-            if (!tel) { return ''; }
+            if (!tel) {
+                return '';
+            }
 
             var value = tel.toString().trim().replace(/^\+/, '');
 
@@ -63,7 +65,7 @@ angular.module('myApp.filters', []).
                     break;
 
                 case 11: // (+)C########## -> +C ##########
-                    if(value[0] == "0")
+                    if (value[0] == "0")
                         country = 91;
                     else
                         country = value[0];
@@ -71,7 +73,7 @@ angular.module('myApp.filters', []).
                     break;
 
                 case 12: // (+) CC ########## -> +CC ##########
-                    country = value.slice(0,2);
+                    country = value.slice(0, 2);
                     number = value.slice(2);
                     break;
 
