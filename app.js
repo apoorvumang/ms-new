@@ -49,6 +49,7 @@ app.get('/api/patient/:id', api.getPatient);
 app.get('/api/patient/dob/:dob', api.getPatientDOB);
 app.get('/api/patient/name/:name', api.getPatientName);
 app.get('/api/patient/idrange/:startID/:endID', api.getPatientRange);
+app.get('/api/patient/siblings/:id', api.getSiblings);
 app.post('/api/patient/sms', api.postSMS);
 
 

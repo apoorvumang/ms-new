@@ -43,7 +43,7 @@ div.search-div
 					tr(ng-repeat="patient in patientList|orderBy:orderByField:reverseSort", ng-class="{success: patient.sms == true}", ng-click="patient.sms = !patient.sms")
 						td {{patient.id}}
 						td
-							a(href="edit-patient/{{patient.id}}") {{patient.name}}
+							a(ng-href="edit-patient/{{patient.id}}") {{patient.name}}
 						td {{patient.dob | printableDate}}
 						td {{patient.sex}}
 						td {{patient.phone}}

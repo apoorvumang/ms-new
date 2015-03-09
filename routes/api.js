@@ -26,6 +26,19 @@ exports.getPatient = function(req, res) {
 	});
 };
 
+exports.getSiblings = function(req, res) {
+	mysql.connection.query('SELECT name, dob, sex, s_id FROM patients, siblings WHERE p_id = '+req.params.id + ' AND patients.id = siblings.s_id;', function(err, rows, fields) {
+		if (err) {
+			console.log(err);
+			res.json({});
+		}
+		else {
+			console.log('Got siblings, number of rows: ', rows.length);
+			res.json(rows);
+		}
+	});
+};
+
 exports.getPatientRange = function(req, res) {
 // console.log('SELECT * FROM patients WHERE id BETWEEN '+req.params.startID + ' AND ' + req.params.endID);
 	mysql.connection.query('SELECT * FROM patients WHERE id BETWEEN '+req.params.startID + ' AND ' + req.params.endID+ ' LIMIT 50', function(err, rows, fields) {

@@ -30,7 +30,34 @@ div.display-patient
 			.row
 				.col-sm-3
 					label Address:
-				.col-sm-9 {{patient.address}}
+				.col-sm-9
+					p(style="white-space: pre;") {{patient.address | addressFormat}}
+		.col-sm-4
+			.row
+				.col-sm-3
+					label Phone:
+				.col-sm-9
+					p(style="white-space: pre;")
+						| {{patient.phone | tel}}
+						| {{patient.phone2 | tel}}
+		.col-sm-4(ng-show="patient.email")
+			label Email:
+			span {{patient.email}}
+	.row(ng-show="patient.siblings.length > 0")
+		.col-sm-1
+			label Siblings:
+		.col-sm-11
+			ul.list-inline
+				li(ng-repeat="sibling in patient.siblings track by sibling.s_id")
+					.panel.panel-default
+						.panel-body
+							a(ng-href="edit-patient/{{sibling.s_id}}") {{sibling.name}}
+							br
+							| {{sibling.dob | printableDate }}
+							br
+							| {{sibling.sex | printableSex}}
+							br
+							| {{sibling.s_id}}
 	.row
 		.col-sm-12
-			pre {{patient | prettyJson}}
+			pre {{patient.siblings | prettyJson}}
