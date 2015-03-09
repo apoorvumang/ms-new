@@ -1,0 +1,36 @@
+div.display-patient
+    .row
+        .col-sm-4
+            label ID:
+            span {{patient.id}}
+        .col-sm-4
+            label Date of Birth:
+            span {{patient.dob | printableDate}}
+        .col-sm-4
+            label Sex:
+            span {{patient.sex}}
+    .row
+        .col-sm-4
+            label Father:
+            span {{patient.father_name}}
+            span.grey {{patient.father_occ}}
+        .col-sm-4
+            label Mother:
+            span {{patient.mother_name}}
+            span.grey {{patient.mother_occ}}
+        .col-sm-4
+            div(style="color:green", ng-show="patient.active == 1")
+                label Active
+                span(style="margin-left:10px").glyphicon.glyphicon-ok
+            div(style="color:maroon", ng-show="patient.active == 0")
+                label Inactive
+                span(style="margin-left:10px").glyphicon.glyphicon-time
+    .row
+        .col-sm-4
+            .row
+                .col-sm-3
+                    label Address:
+                .col-sm-9 {{patient.address}}
+    .row
+        .col-sm-12
+            pre {{patient | prettyJson}}

@@ -13,4 +13,9 @@ angular.module('myApp.filters', []).
       var printableDate = new Date(date);
       return printableDate.toDateString();
     };
+  }).
+  filter('prettyJson', function() {
+    return function(json) {
+      return JSON.stringify(json, null, "\t");
+    };
   });

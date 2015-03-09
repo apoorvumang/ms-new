@@ -5,7 +5,7 @@ var hasOwnProperty = Object.prototype.hasOwnProperty;
 function isEmpty(obj) {
 
     // null and undefined are "empty"
-    if (obj == null) return true;
+    if (obj === null) return true;
 
     // Assume if it has a length property with a non-zero value
     // that that property is correct.
@@ -49,15 +49,19 @@ function AddPatientCtrl() {}
 AddPatientCtrl.$inject = [];
 
 function EditPatientCtrl($scope, $http, $routeParams) {
+	$scope.editPatient = false;
+	$scope.toggleEditing = function() {
+		$scope.editPatient = true;
+	}
 	$http({method: 'GET', url: '/api/patient/'+$routeParams['patientID']}).
 		success(function(data, status, headers, config) {
 		$scope.patient = data;
+		$scope.patient.active = 0;
 	}).
 	error(function(data, status, headers, config) {
 		$scope.patient = {};
 	});
 }
-
 EditPatientCtrl.$inject = ['$scope', '$http', '$routeParams'];
 
 function SearchPatientCtrl($scope, $http) {

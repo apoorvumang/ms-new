@@ -28,3 +28,13 @@ node_modules
 
 # Debug log from npm
 npm-debug.log
+
+ms-new.sublime-workspace
+
+ms-new.iml
+
+ms-new.sublime-project
+
+.idea
+
+.DS_Store

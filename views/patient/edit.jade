@@ -1,2 +1,13 @@
-pre
-	{{patient}}
+div#patient-show(ng-hide="editPatient")
+	.row
+		.col-sm-12
+			h3
+				{{patient.name}}
+				button.btn.btn-default.btn-heading(ng-click="toggleEditing()") Edit patient
+	.row
+		.col-sm-12
+			<display-patient></display-patient>
+div#patient-edit(ng-show="editPatient")
+	.row
+		.col-sm-12
+			input(type="text", ng-model="patient.name")

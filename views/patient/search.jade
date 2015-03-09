@@ -31,8 +31,8 @@ div.search-div
 		.row
 			.col-sm-12
 				h3 Results
-					button.btn.btn-default(ng-click="toggleAllSMS()", style="margin-left: 20px") Toggle all
-					button.btn.btn-default(ng-click="deselectAllSMS()", style="margin-left: 20px") Deselect all
+					button.btn.btn-default.btn-heading(ng-click="toggleAllSMS()") Toggle all
+					button.btn.btn-default.btn-heading(ng-click="deselectAllSMS()") Deselect all
 				table.table
 					tr
 						th(ng-repeat= "field in fieldList")
