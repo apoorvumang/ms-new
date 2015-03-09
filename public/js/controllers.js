@@ -54,17 +54,9 @@ function EditPatientCtrl($scope, $http, $routeParams) {
     $scope.toggleEditing = function () {
         $scope.editPatient = true;
     };
-    $http({method: 'GET', url: '/api/patient/' + $routeParams['patientID']}).
+    $http({method: 'GET', url: '/api/patientAndSiblings/' + $routeParams['patientID']}).
         success(function (data, status, headers, config) {
             $scope.patient = data;
-            $scope.patient.siblings = [];
-            $http({method: 'GET', url: '/api/patient/siblings/' + $routeParams['patientID']}).
-                success(function (data, status, headers, config) {
-                    $scope.patient.siblings = data;
-                }).
-                error(function (data, status, headers, config) {
-                    $scope.patient.siblings = [];
-                });
         }).
         error(function (data, status, headers, config) {
             $scope.patient = {};
@@ -174,10 +166,6 @@ function SearchPatientCtrl($scope, $http) {
 
     $scope.resetSMSMessage = function () {
         $scope.smsMessage = $scope.defaultSMSMessage;
-    };
-
-    $scope.pretty = function () {
-        return JSON.stringify($scope.patientList, undefined, 2, 2);
     };
 }
 SearchPatientCtrl.$inject = ['$scope', '$http'];

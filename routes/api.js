@@ -26,6 +26,34 @@ exports.getPatient = function (req, res) {
     });
 };
 
+exports.getPatientAndSiblings = function (req, res) {
+    mysql.connection.query('SELECT * FROM patients WHERE id = ' + req.params.id, function (err, rows, fields) {
+        if (err) {
+            console.log(err);
+            res.json(err);
+        }
+        else {
+            console.log('Got patient, number of rows: ', rows.length);
+            if(rows.length == 0)
+                res.json({});
+            else {
+                var patient = rows[0];
+                mysql.connection.query('SELECT name, dob, sex, s_id FROM patients, siblings WHERE p_id = ' + req.params.id + ' AND patients.id = siblings.s_id', function (err, rows, fields) {
+                    if (err) {
+                        console.log(err);
+                        res.json(err);
+                    }
+                    else {
+                        console.log('Got siblings, number of rows: ', rows.length);
+                        patient.siblings = rows;
+                        res.json(patient);
+                    }
+                });
+            }
+        }
+    });
+};
+
 exports.getSiblings = function (req, res) {
     mysql.connection.query('SELECT name, dob, sex, s_id FROM patients, siblings WHERE p_id = ' + req.params.id + ' AND patients.id = siblings.s_id;', function (err, rows, fields) {
         if (err) {
