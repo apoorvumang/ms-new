@@ -1,0 +1,17 @@
+div.edit-patient
+    form(name="editPatientForm", novalidate="")
+        .row.form-group(ng-class="{ 'has-error': editPatientForm.name.$invalid, 'has-success': editPatientForm.name.$valid }")
+            .col-sm-6
+                input(type="text", name="name", ng-model="patient.name", placeholder="Name", required="").form-control.input-lg
+        ////    .col-sm-6
+        ////        button.btn.btn-default.btn-heading(ng-click="editPatient=false") Stop editing
+        //.row
+        //    .col-sm-4
+        //        label ID:
+        //        span {{patient.id}}
+        //    .col-sm-4
+        //        label Date of Birth:
+        //        span {{patient.dob | printableDate}}
+        //    .col-sm-4
+        //        label Sex:
+        //        span {{patient.sex}}

@@ -14,4 +14,10 @@ angular.module('myApp.directives', []).
             restrict: 'E',
             templateUrl: 'patient/displayPatient'
         };
+    }]).
+    directive('editPatient', [function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'patient/editPatient'
+        };
     }]);
