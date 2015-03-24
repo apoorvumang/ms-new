@@ -12,4 +12,5 @@ angular.module('myApp', ['myApp.controllers', 'myApp.filters', 'myApp.services',
         $routeProvider.when('/edit-patient/:patientID', {templateUrl: 'patient/edit', controller: 'EditPatientCtrl'});
         $routeProvider.otherwise({redirectTo: '/view1'});
         $locationProvider.html5Mode(true);
+
     }]);
