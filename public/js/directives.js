@@ -20,4 +20,27 @@ angular.module('myApp.directives', []).
             restrict: 'E',
             templateUrl: 'patient/editPatient'
         };
-    }]);
+    }]).
+    directive('tempInput', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'patient/tempInput',
+            scope: {
+                fieldname: "=",
+                vmsg: "@",
+                model: "="
+            }
+        };
+    }).
+    directive('beforeInput', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'patient/beforeInput',
+            scope: {
+                fieldname: "=",
+                vmsg: "@",
+                model: "="
+            }
+        };
+    });
+

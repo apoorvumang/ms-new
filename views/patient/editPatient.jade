@@ -1,8 +1,12 @@
 div.edit-patient
     form(name="editPatientForm", novalidate="")
-        .row.form-group(ng-class="{ 'has-error': editPatientForm.name.$invalid, 'has-success': editPatientForm.name.$valid }")
-            .col-sm-6
-                input(type="text", name="name", ng-model="patient.name", placeholder="Name", required="").form-control.input-lg
+        .row
+            .col-md-6
+                .has-feedback.form-group-lg(ng-class="{'has-error': editPatientForm.name.$invalid, 'has-success': editPatientForm.name.$valid}")
+                    input(type="text", name="name", ng-model="patient.name", placeholder="Name").form-control.input-lg
+                    temp-input(fieldname="editPatientForm.name", vmsg="Name is required", model="patient.name", placeholder="Name")
+
+
         ////    .col-sm-6
         ////        button.btn.btn-default.btn-heading(ng-click="editPatient=false") Stop editing
         //.row
