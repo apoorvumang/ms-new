@@ -2,20 +2,23 @@ div.edit-patient
     form(name="editPatientForm", novalidate="")
         .row
             .col-md-6
-                .has-feedback.form-group-lg(ng-class="{'has-error': editPatientForm.name.$invalid, 'has-success': editPatientForm.name.$valid}")
-                    input(type="text", name="name", ng-model="patient.name", placeholder="Name").form-control.input-lg
-                    temp-input(fieldname="editPatientForm.name", vmsg="Name is required", model="patient.name", placeholder="Name")
-
-
-        ////    .col-sm-6
-        ////        button.btn.btn-default.btn-heading(ng-click="editPatient=false") Stop editing
-        //.row
-        //    .col-sm-4
-        //        label ID:
-        //        span {{patient.id}}
-        //    .col-sm-4
-        //        label Date of Birth:
-        //        span {{patient.dob | printableDate}}
-        //    .col-sm-4
-        //        label Sex:
-        //        span {{patient.sex}}
+                .form-group.has-feedback(show-errors).form-group-lg
+                    input(type="text", name="name", ng-model="patient2.name", placeholder="Name", required).form-control.input-lg
+                    span.glyphicon.form-control-feedback
+            .col-sm-6
+                button.btn.btn-default.btn-heading(ng-click="editPatient=false") Cancel
+        .row
+            .col-sm-4
+                label ID:
+                span {{patient.id}}
+            .col-sm-4
+                .form-group.has-feedback
+                    label.control-label Date of Birth:
+                    input(type="date", name="dob", ng-model="patient2.dob", required).form-control
+                    | {{patient2.dob | date: "yyyy-MM-dd"}}
+            .col-sm-4
+                label Sex:
+                span {{patient.sex}}
+        .row
+            .col-md-6
+                input(type="date", id="exampleInput", name="input", ng-model="example.value", placeholder="yyyy-MM-dd", required)
