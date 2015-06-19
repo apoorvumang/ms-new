@@ -1,4 +1,4 @@
-div.edit-patient
+div.display-patient
     form(name="editPatientForm", novalidate="")
         .row
             .col-md-6
@@ -10,15 +10,11 @@ div.edit-patient
         .row
             .col-sm-4
                 label ID:
-                span {{patient.id}}
+                span {{patient2.id}}
             .col-sm-4
                 .form-group.has-feedback
                     label.control-label Date of Birth:
                     input(type="date", name="dob", ng-model="patient2.dob", required).form-control
-                    | {{patient2.dob | date: "yyyy-MM-dd"}}
             .col-sm-4
                 label Sex:
                 span {{patient.sex}}
-        .row
-            .col-md-6
-                input(type="date", id="exampleInput", name="input", ng-model="example.value", placeholder="yyyy-MM-dd", required)

@@ -48,14 +48,12 @@ angular.module('myApp.controllers', []).
         $scope.toggleEditing = function () {
             $scope.editPatient = true;
         };
-        $scope.example = {
-            value: new Date(2013, 9, 22)
-        };
         $http({method: 'GET', url: '/api/patientAndSiblings/' + $routeParams['patientID']}).
             success(function (data, status, headers, config) {
                 $scope.patient = data;
-                $scope.patient2 = data;
-                $scope.patient2.dob = new Date(2013, 9, 22);
+                $scope.patient.dob = new Date($scope.patient.dob);
+                $scope.patient2 = $scope.patient;
+                console.log(new Date());
             }).
             error(function (data, status, headers, config) {
                 $scope.patient = {};
