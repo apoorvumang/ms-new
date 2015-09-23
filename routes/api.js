@@ -110,6 +110,19 @@ exports.getPatientName = function (req, res) {
     });
 };
 
+exports.getSchedule = function(req, res) {
+    mysql.connection.query('SELECT vs.given, v.name, vs.date, vs.date_given, v.lower_limit, v.upper_limit, vm.name as make from vac_schedule vs, vaccines v, vac_make vm WHERE vs.p_id = ' + req.params.id + ' AND vs.v_id = v.id AND vm.id = vs.make ORDER BY vs.date LIMIT 50', function (err, rows, fields) {
+        if (err) {
+            console.log(err);
+            res.json([]);
+        }
+        else {
+            console.log('Got schedule from id, number of rows: ', rows.length);
+            res.json(rows);
+        }
+    });
+}
+
 exports.postSMS = function (req, res) {
     console.log(req.body);
     res.json({numSent: req.body.smsList.length});
